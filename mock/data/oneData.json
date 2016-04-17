@@ -1,0 +1,19 @@
+{
+    "code": 200,
+    "success": true,
+    "data": {
+        "items": [{
+            "data": [
+                100,
+                150,
+                90,
+                56,
+                140,
+                110,
+                60
+            ],
+            "name": "tom"
+        }],
+        "categories": ["first", "second", "third", "forth", "fifth", "sixth", "seventh"]
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "success": true,
+    "code": 200,
+    "data": {
+        "items": [{
+            "type": "column",
+            "name": "第一天",
+            "data": [3, 2, 1, 3, 4]
+        },{
+            "type": "column",
+            "name": "第二天",
+            "data": [2, 3, 5, 7, 9]
+        },{
+            "type": "spline",
+            "name": "平均值",
+            "data": [2.5, 2.5, 3, 5, 6.5]
+        },{
+            "type": "pie",
+            "name": "总量",
+            "data": [{
+                "name": "第一天",
+                "y": 13
+            },{
+                "name": "第二天",
+                "y": 26
+            }]
+        }],
+        "categories": ["苹果", "橘子", "石榴", "香蕉", "草莓"]
+    }
+}

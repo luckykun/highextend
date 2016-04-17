@@ -1,0 +1,1134 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>highextend demo</title>
+
+    <link rel="stylesheet" href="/style/demo.css" charset="utf-8">
+</head>
+
+<body>
+    <div class="go-top"></div>
+    <div id="container">
+        <div class="left-nav">
+            <ul>
+                <li><a href="#area1">使用文档</a></li>
+                <li><a href="#area2" class="active">线图</a></li>
+                <li><a href="#area3">散点图</a></li>
+                <li><a href="#area4">柱状图</a></li>
+                <li><a href="#area5">区域图</a></li>
+                <li><a href="#area6">圆饼图</a></li>
+                <li><a href="#area7">其他</a></li>
+                <li><a href="#area8">混合图</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div id="area1">
+                <h5 class="hxt-title">使用文档</h5>
+                <xmp style="margin-left:-128px;">
+                    图形渲染方法:
+                        Hxt.line(elem, data, options);         //渲染默认折线图
+                        Hxt.spline(elem, data, options);         //曲线图
+                        Hxt.scatter(elem, data, options);         //散点图
+                        Hxt.bubble(elem, data, options);         //bubble图
+                        Hxt.column(elem, data, options);         //柱状图
+                        Hxt.bar(elem, data, options);         //bar图，（横向柱状图）
+                        Hxt.area(elem, data, options);         //区域图（默认为平滑区域图）
+                        Hxt.pie(elem, data, options);         //圆饼图
+                        Hxt.polar(elem, data, options);         //雷达图
+                        Hxt.pyramid(elem, data, options);         //金字塔图
+                        Hxt.mix(elem, data, options);         //混合图
+
+                    公共配置项:
+                        emptyHtml: 数据为空时的提示信息，支持html格式。
+                        backgroundColor: 图表背景颜色，默认为’白色‘。
+                        marginTop: 图形的上边距，例如 marginTop: 60。
+                        marginRight: 图形的上边距，例如 marginRight: 60。
+                        chartLoad: 设置图形加载方式。一般实时动态数据会配置此项。
+                        colors: 颜色，类型为数组。非必选，有默认的颜色。
+                        title: 图表标题，默认为空。
+                        subtitle: 副标题，默认为空。
+                        markerEnabled: 是否显示线条上的点，默认true为显示。
+                        markerSymbol: 线条上点的形状，默认为‘circle’圆形，并且默认样式为空心。其他值有‘square’，‘diamond’，‘triangle’等。
+                        legendEnabled: 图例是否显示，默认为true，显示图例。
+                        legendLayout: 图例显示方式，默认为水平方向：‘horizontal’。 ‘vertical’为垂直方向。
+                        legendAlign: 水平方向显示位置，默认中间位置：‘center’，其他值有‘right’，‘left’。
+                        legendVerticalAlign: 垂直方向显示位置，默认‘bottom’，其他值有‘top’，‘middle’。
+                        legendItemMarginBottom: 每个图例的下边距，默认为4px。
+                        shared: tooltip提示框是否被共享。默认为false。
+                        valuePrefix: tooltip悬浮框value值前面的字符，默认为空。
+                        valueSuffix: tooltip悬浮框value值后面的字符，默认为空。
+                        xDateFormat: tooltip中时间转化格式，默认为‘%Y-%m-%d’，即‘2016-01-10’。
+                        chartLabel： 图形中的提示文案，格式为对象，如：{html:'title', style:{left:'30px', top: '5px'}}。
+
+                    线图/柱状图配置项:
+                        XtickWidth: 默认为1，如果设置为0，则不显示x轴刻度线。
+                        Xtype: 横坐标类型，默认为空。如设置'datetime'，则为时间类型，默认转为'01-01'格式。
+                        Ytitle: 纵坐标标题，默认为空。
+                        Ytype: 纵坐标类型，默认为空。如设置'rate',则用1024为单位计算，且默认单位为‘kb’，大于1024单位变为‘M’。
+                        rateUnit: 图表为流量类型时，纵坐标的单位间隔。例：num－以num个1024为单位隔开。
+
+                    饼图配置项:
+                        size: 饼图的整体大小（百分比），默认为100%。
+                        innerSize: 内圆所占的百分比，默认为55%。
+                        showInLegend: 设置圆饼图的图例是否显示，默认为true。
+                        startAngle: 圆饼图的开始角度。
+                        endAngle: 圆饼图的结束角度。
+                        pieLabel: 设置圆饼图的series文案，默认为数量。
+                        pieClick: 圆饼图的点击事件。
+                        pieMouseOut: 圆饼图的mouseout事件。
+                        pieMouseOver: 圆饼图的mouseover事件。
+                        showPercentLabels: 是否显示百分比的labels，默认为false。
+
+                    雷达图配置项:
+                        polarType: 雷达图的形状，可设置为‘circle’－圆形，默认为‘polygon’－菱形。
+                        polarSize: 雷达图大小百分比，默认95%。
+
+                    正负对比图（bar）配置项:
+                        barStacking: 设置为“normal”－表示正负对比图。
+
+                    混合图特有配置项:
+                        mixPieCenter: 混合图中饼图的特有设置--中心原点坐标，如[100,50]。
+                        mixPieSize: 混合图中饼图的特有设置--饼图大小，默认为‘60%’。
+                        mixPieInnerSize: 混合图中饼图的特有设置--饼图空心圆大小，默认为0。
+                        miePieShowInLegend: 混合图中饼图的特有设置--是否显示legend，默认为false。
+
+                </xmp>
+                <a href="//gitlab.alibaba-inc.com/csfe/highextend/blob/daily/0.0.4/README.md" target="_blank" class="document-link">详细文档戳这里</a>
+            </div>
+
+            <div id="area2">
+                <h5 class="hxt-title">线图</h5>
+                <div class="callout-info">
+                    <h4>适合范围：</h4>
+                    <p>展示基本信息，流量图、动态图等等。</p>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">默认配置图</h5>
+                    <div id="line-chart1" class="chart line-chart1"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="line-chart1" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart = Hxt.line('line-chart1', data);   //没有配置项，则使用默认配置。
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,90,94,99,80],
+                                        "name": "tom"
+                                    }, {
+                                        "data": [89,95,76,80,70],
+                                        "name": "jane"
+                                    }],
+                                    "categories": ["first", "second", "third", "forth", "fifth"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">横坐标为时间格式</h5>
+                    <div id="line-chart2" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="line-chart2" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart = Hxt.spline('line-chart2', data, {
+                                    Xtype: 'datetime',
+                                    shared: true
+                                });
+                                chart.fn.setTitle({text: '这是我动态设置的标题'});
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,90,94,99,80],
+                                        "name": "tom"
+                                    }, {
+                                        "data": [89,95,76,80,70],
+                                        "name": "jane"
+                                    }],
+                                    "timeScope": {
+                                        "interval": 86400000,
+                                        "start": 1452436583973
+                                    }
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">纵坐标为流量数据</h5>
+                    <div id="line-chart3" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="line-chart3" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart = Hxt.spline('line-chart3', data, {
+                                    Xtype: 'datetime',
+                                    Ytype: 'rate'
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,90,94,99,80],
+                                        "name": "tom"
+                                    }, {
+                                        "data": [89,95,76,80,70],
+                                        "name": "jane"
+                                    }],
+                                    "timeScope": {
+                                        "interval": 86400000,
+                                        "start": 1452436583973
+                                    }
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">空数据的提示信息</h5>
+                    <div id="line-chart4" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="line-chart4" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var html = '<div style="padding-top:100px;text-align:center;font-size:16px;">
+                                    sorry，没有查询到相关数据...</div>';
+
+                                var chart = Hxt.spline('line-chart4', data, {
+                                    emptyHtml: html
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [],
+                                    "timeScope": {
+                                        "interval": 86400000,
+                                        "start": 1452436583973
+                                    }
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">实时数据的展示图（增加点）</h5>
+                    <div id="line-chart5" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="line-chart5" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart = Hxt.spline('line-chart5', data, {
+                                    legendEnabled: false
+                                });
+
+                                var time = function() {
+                                    setTimeout(function() {
+                                        mods.Ajax('/liveData.json', function(d) {
+                                            var arr = d.categories;
+                                            //如果有多条线，可用循环chart.fn.series操作
+                                            var series = chart.fn.series[0];
+                                            var x = 'addX';
+                                            var y = Math.random().toFixed(2) * 50;
+                                            series.addPoint([x, y], true, true);
+
+                                            time();
+                                        });
+                                    }, 2000);
+                                };
+                                time();
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,150,90,56,140,110,60],
+                                        "name": "tom"
+                                    }],
+                                    "categories": ["first", "second", "third", "forth", "fifth", "sixth",
+                                    "seventh"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">实时数据的展示图（增加线）</h5>
+                    <div id="line-chart6" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="line-chart6" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart2 = Hxt.spline('line-chart6', data, {
+                                    shared: true
+                                });
+
+                                //展示动态添加一行数据，和动态删除一行数据的例子
+                                var num = 1;
+                                var time1 = function() {
+                                    var colors = chart2.fn.options.colors;
+                                    if(num < 4) {
+                                        setTimeout(function() {
+                                            chart2.fn.addSeries({
+                                                name: 'name' + num,
+                                                data:[num*50, num*50, num*50, num*50, num*50, num*50, num*50],
+                                                color: colors[num]
+                                            });
+                                            num ++;
+                                            time1();
+                                        }, 3000);
+                                    }else {
+                                        setTimeout(function() {
+                                            var series = chart2.fn.series;
+                                            series[series.length-1].remove();
+                                            num  = num == 6 ? 1 : num+1;
+                                            time1();
+                                        }, 3000);
+                                    }
+                                };
+                                time1();
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,150,90,56,140,110,60],
+                                        "name": "tom"
+                                    }],
+                                    "categories": ["first", "second", "third", "forth", "fifth", "sixth",
+                                    "seventh"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div id="area3">        <!-- 散图区域 -->
+                <h5 class="hxt-title">散点图</h5>
+                <div class="callout-info">
+                    <h4>适合范围：</h4>
+                    <p>展示横轴间隔不一致的数据，或者动态展示的数据。</p>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">默认配置散点图</h5>
+                    <div id="scatter-chart1" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="scatter-chart1" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart1 = Hxt.scatter('scatter-chart1', data, {
+                                    legendEnabled: false,
+                                    valueSuffix: '分'
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,90,94,99,80],
+                                        "name": "tom"
+                                    }, {
+                                        "data": [89,95,76,80,70],
+                                        "name": "jane"
+                                    }],
+                                    "categories": ["first", "second", "third", "forth", "fifth"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">默认配置bubble图</h5>
+                    <div id="scatter-chart2" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="scatter-chart2" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart = Hxt.bubble('scatter-chart2', data, {
+                                    legendEnabled: false,
+                                    valueSuffix: '分'
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,90,94,99,80],
+                                        "name": "tom"
+                                    }, {
+                                        "data": [89,95,76,80,70],
+                                        "name": "jane"
+                                    }],
+                                    "categories": ["first", "second", "third", "forth", "fifth"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="area4">
+                <h5 class="hxt-title">柱状图</h5>
+                <div class="callout-info">
+                    <h4>适合范围：</h4>
+                    <p>展示多条用于互相对比的数据。</p>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">默认column图</h5>
+                    <div id="column-chart1" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="column-chart1" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart3 = Hxt.column('column-chart1', data, {  //column图
+                                    shared:true,
+                                    valueSuffix: '分'
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,90,94,99,80],
+                                        "name": "tom"
+                                    }, {
+                                        "data": [89,95,76,80,70],
+                                        "name": "jane"
+                                    }],
+                                    "categories": ["first", "second", "third", "forth", "fifth"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">默认bar图</h5>
+                    <div id="column-chart2" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="column-chart2" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart4 = Hxt.bar('column-chart2', data, { //column图
+                                    shared: true,
+                                    colors: ['#090', '#f90'],
+                                    valueSuffix: '分'
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,90,94,99,80],
+                                        "name": "tom"
+                                    }, {
+                                        "data": [89,95,76,80,70],
+                                        "name": "jane"
+                                    }],
+                                    "categories": ["first", "second", "third", "forth", "fifth"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">流量柱状图</h5>
+                    <div id="column-chart3" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="column-chart3" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart1 = Hxt.column('column-chart3', data, {    //显示流量数据（柱状图）。
+                                    Xtype: 'datetime',
+                                    Ytype: 'rate',
+                                    shared: true,
+                                    valueSuffix: 'kb'
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [1024,1190,1280,990,900],
+                                        "name": "tom"
+                                    }, {
+                                        "data": [1900,792,2048,1222,1200],
+                                        "name": "jane"
+                                    }],
+                                    "timeScope": {
+                                        "interval": 86400000,
+                                        "start": 1453024576493
+                                    }
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">正负对比图</h5>
+                    <div id="column-chart4" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="column-chart4" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart1 = Hxt.bar('column-chart4', data, {
+                                    barStacking: 'normal',      //此行配置表示正负对比图
+                                    valueSuffix: '人',
+                                    shared: true
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {   //两列数据，一正一负
+                                    "items": [{
+                                        "name": "男性",
+                                        "data": [-100, -150, -255, -182, -50]
+                                    }, {
+                                        "name": "女性",
+                                        "data": [150, 194, 270, 190, 60]
+                                    }],
+                                    "categories": ["0-20岁", "21-40岁", "41-80岁", "81-100岁", "100岁以上"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="area5">
+                <h5 class="hxt-title">区域图</h5>
+                <div class="callout-info">
+                    <h4>适合范围：</h4>
+                    <p>展示基本信息，流量图、动态图等等。</p>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">默认区域曲线图</h5>
+                    <div id="area-chart1" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="area-chart1" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart = Hxt.area('area-chart1', data, {    //单条数据自动使用渐变的颜色
+                                    legendEnabled: false,
+                                    valueSuffix: '分'
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,150,90,56,140,110,60],
+                                        "name": "tom"
+                                    }],
+                                    "categories": ["first", "second", "third", "forth", "fifth", "sixth",
+                                     "seventh"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">默认多条区域曲线图</h5>
+                    <div id="area-chart2" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="area-chart2" style="width:400px;height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart1 = Hxt.area('area-chart2', data, {    //曲线图
+                                    Xtype: 'datetime',
+                                    shared: true
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "data": [100,105,94,79,80],
+                                        "name": "tom"
+                                    }, {
+                                        "data": [65,90,140,100,120],
+                                        "name": "jane"
+                                    }],
+                                    "timeScope": {
+                                        "interval": 86400000,
+                                        "start": 1453024576493
+                                    }
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="area6">
+                <h5 class="hxt-title">圆饼图</h5>
+                <div class="callout-info">
+                    <h4>适合范围：</h4>
+                    <p>展示用于显示百分比的数据，或者用于对比的数据。</p>
+                </div>
+                <div class="pie-area one-chart-area">
+                    <h5 class="hxt-little-title">默认圆饼图</h5>
+                    <div id="pie-chart1" class="pie-chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="pie-chart1" style="width:260px;
+                                height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart = Hxt.pie('pie-chart1', data);
+                                //没有配置项的默认圆饼图
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "name": "已开通",
+                                        "data": 20
+                                    },{
+                                        "name": "未开通",
+                                        "data": 5
+                                    },{
+                                        "name": "待定",
+                                        "data": 10
+                                    }]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="pie-area one-chart-area">
+                    <h5 class="hxt-little-title">半圆图(设置角度)</h5>
+                    <div id="pie-chart2" class="pie-chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="pie-chart2" style="width:260px;
+                                height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart1 = Hxt.pie('pie-chart2', data,
+                                {    //设置角度，达到半圆效果
+                                    startAngle: -90,
+                                    endAngle: 90
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "name": "已开通",
+                                        "data": 20
+                                    },{
+                                        "name": "未开通",
+                                        "data": 5
+                                    },{
+                                        "name": "待定",
+                                        "data": 10
+                                    }]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="pie-area one-chart-area">
+                    <h5 class="hxt-little-title">实心圆饼图</h5>
+                    <div id="pie-chart3" class="pie-chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="pie-chart3" style="width:260px;
+                                height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart2 = Hxt.pie('pie-chart3', data,
+                                {
+                                    innerSize: '0%',
+                                    showInLegend: false
+                                });   //隐藏图例的实心圆
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "name": "已开通",
+                                        "data": 20
+                                    },{
+                                        "name": "未开通",
+                                        "data": 5
+                                    },{
+                                        "name": "待定",
+                                        "data": 10
+                                    }]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="pie-area one-chart-area">
+                    <h5 class="hxt-little-title">百分比数据圆饼图</h5>
+                    <div id="pie-chart4" class="pie-chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="pie-chart4" style="width:260px;
+                                height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart3 = Hxt.pie('pie-chart4', data,
+                                {
+                                    valueSuffix: '%',
+                                    showPercentLabels: true
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {       //数据直接返回百分比的数值
+                                    "items": [{
+                                        "name": "小孩",
+                                        "data": 10
+                                    },{
+                                        "name": "成年",
+                                        "data": 44
+                                    },{
+                                        "name": "中年",
+                                        "data": 30
+                                    },{
+                                        "name": "老年",
+                                        "data": 4
+                                    },{
+                                        "name": "其他",
+                                        "data": 12
+                                    }]
+                                };      //所有值相加得100
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="pie-area one-chart-area">
+                    <h5 class="hxt-little-title">绑定事件圆饼图</h5>
+                    <div id="pie-chart5" class="pie-chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="pie-chart5" style="width:260px;
+                                height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart4 = Hxt.pie('pie-chart5', data,
+                                {
+                                    size: '90%',
+                                    showInLegend: false,
+                                    pieClick: function(e) {
+                                        console.log(e.point.name);
+                                    },
+                                    pieMouseOut: function(){
+                                        console.log('leave');
+                                    }
+                                });   //给圆饼图绑定事件(打开控制台查看效果)
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "name": "已开通",
+                                        "data": 20
+                                    },{
+                                        "name": "未开通",
+                                        "data": 5
+                                    },{
+                                        "name": "待定",
+                                        "data": 10
+                                    }]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="area7">
+                <h5 class="hxt-title">其他</h5>
+                <div class="callout-info">
+                    <h4>适合范围：</h4>
+                    <p>其他</p>
+                </div>
+                <div class="pie-area one-chart-area">
+                    <h5 class="hxt-little-title">雷达图</h5>
+                    <div id="more-chart1" class="pie-chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="more-chart1" style="width:260px;
+                                height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart1 = Hxt.polar('more-chart1', data, {
+                                    marginTop: 30,
+                                    legendEnabled: false,
+                                    valueSuffix: '分',
+                                    shared: true,
+                                    markerEnabled: false
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "name": "小红",
+                                        "data": [95, 89, 100, 93, 86]
+                                    },{
+                                        "name": "小明",
+                                        "data": [84, 78, 85, 90, 92]
+                                    },{
+                                        "name": "小刚",
+                                        "data": [79, 82, 78, 80, 78]
+                                    },{
+                                        "name": "小娟",
+                                        "data": [75, 72, 68, 74, 70]
+                                    }],
+                                    "categories": ["第一次", "第二次", "第三次",
+                                     "第四次", "第五次"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="pie-area one-chart-area">
+                    <h5 class="hxt-little-title">金字塔图</h5>
+                    <div id="more-chart2" class="pie-chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="more-chart2" style="width:260px;
+                                height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart1 = Hxt.polar('more-chart1', data, {
+                                    marginTop: 30,
+                                    legendEnabled: false,
+                                    valueSuffix: '分'
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "name": "小红",
+                                        "data": [95, 89, 100, 93, 86]
+                                    },{
+                                        "name": "小明",
+                                        "data": [84, 78, 85, 90, 92]
+                                    },{
+                                        "name": "小刚",
+                                        "data": [79, 82, 78, 80, 78]
+                                    },{
+                                        "name": "小娟",
+                                        "data": [75, 72, 68, 74, 70]
+                                    }],
+                                    "categories": ["第一次", "第二次", "第三次",
+                                     "第四次", "第五次"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="area8">
+                <h5 class="hxt-title">混合图</h5>
+                <div class="callout-info">
+                    <h4>适合范围：</h4>
+                    <p>展示多种不同类型的数据，比如单条信息、总量数据以及百分比数据等等。</p>
+                </div>
+                <div class="one-chart-area">
+                    <h5 class="hxt-little-title">多种图结合</h5>
+                    <div id="mix-chart1" class="chart"></div>
+                    <ul class="nav-tab">
+                        <li class="active" data-area="codeHtml">html代码</li>
+                        <li data-area="codeJs">javascript代码</li>
+                        <li data-area="codeData">数据格式</li>
+                    </ul>
+                    <div class="code-area">
+                        <div class="codeHtml code">
+                            <xmp>
+                                <div id="mix-chart1" style="width:260px;
+                                height:260px;"></div>
+                            </xmp>
+                        </div>
+                        <div class="codeJs code">
+                            <xmp>
+                                var chart = Hxt.mix('mix-chart1', data, {
+                                    valueSuffix: '斤',
+                                    mixPieCenter: [60, 50],
+                                    mixPieSize: '55%',
+                                    shared: true,
+                                    chartLabel: {
+                                        html: '水果两天的总销量',
+                                        style: {
+                                            left: '30px',
+                                            top: '5px'
+                                        }
+                                    }
+                                });
+                            </xmp>
+                        </div>
+                        <div class="codeData code">
+                            <xmp>
+                                var data = {
+                                    "items": [{
+                                        "type": "column",
+                                        "name": "第一天",
+                                        "data": [3, 2, 1, 3, 4]
+                                    },{
+                                        "type": "column",
+                                        "name": "第二天",
+                                        "data": [2, 3, 5, 7, 9]
+                                    },{
+                                        "type": "spline",
+                                        "name": "平均值",
+                                        "data": [2.5, 2.5, 3, 5, 6.5]
+                                    },{
+                                        "type": "pie",
+                                        "name": "总量",
+                                        "data": [{
+                                            "name": "第一天",
+                                            "y": 13
+                                        },{
+                                            "name": "第二天",
+                                            "y": 26
+                                        }]
+                                    }],
+                                    "categories": ["苹果", "橘子", "石榴", "香蕉", "草莓"]
+                                };
+                            </xmp>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="test-chart" style="min-width:400px;height:400px;margin-right:20px;"></div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
+    <!-- <script src="http://g.alicdn.com/sd-base/vendor/1.0.1/js/all.js"></script> -->
+    <script src="http://img.hcharts.cn/highcharts/modules/funnel.js"></script>
+    <script src="js/yd-config.js"></script>
+    <script src="js/demo.js"></script>
+</body>
+
+</html>

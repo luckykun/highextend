@@ -1,0 +1,17 @@
+{
+    "code": 200,
+    "success": true,
+    "data": {
+        "items": [{
+            "data": [1024,1190,1280,990,900],
+            "name": "tom"
+        }, {
+            "data": [1900,792,2048,1222,1200],
+            "name": "jane"
+        }],
+        "timeScope": {
+            "interval": 86400000,
+            "start": 1453024576493
+        }
+    }
+}

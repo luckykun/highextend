@@ -1,0 +1,31 @@
+{
+    "success": true,
+    "code": 200,
+    "data": {
+        "items": [
+            {
+                "name": "小孩",
+                "data": 10
+            },
+
+            {
+                "name": "成年",
+                "data": 44
+            },
+
+            {
+                "name": "中年",
+                "data": 20
+            },
+
+            {
+                "name": "老年",
+                "data": 18
+            },
+            {
+                "name": "其他",
+                "data": 8
+            }
+        ]
+    }
+}
