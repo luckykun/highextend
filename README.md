@@ -1,4 +1,9 @@
 
+- 直接clone代码到本地
+- 到项目目录下，执行命令`npm install`
+- 然后执行`gulp`就可以看到所有demo了。
+
+
 # Highextend文档
 
 
