@@ -1,10 +1,12 @@
+# Highextend文档
+
+## 运行demo
 
 - 直接clone代码到本地
+- 安装nodejs以及gulp（已经安装请忽略，gulp简单教程可以戳[用gulp来管理一个项目](http://www.cnblogs.com/jarson-7426/p/5157616.html)）
 - 到项目目录下，执行命令`npm install`
 - 然后执行`gulp`就可以看到所有demo了。
 
-
-# Highextend文档
 
 
 ## 使用方法
