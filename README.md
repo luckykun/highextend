@@ -27,7 +27,7 @@
 
 
 - elem：绘制图表元素的id
-- data：图表的数据。数据格式见[图表接口规范文档](http://csfe.alibaba.net:8888/doc/3)。
+- data：图表的数据。数据格式可以参见[demo的源码](http://luckykun.com/work/2016-05-12/high-extend.html)。
 - options：图表配置项,`可以为空，为空则使用默认配置。`
 
 example:
@@ -42,7 +42,7 @@ example:
 ```
 
 
-另外，你还可以[去demo中心看看](http://localhost:3010/)
+另外，你还可以[去demo中心看看](http://luckykun.com/work/2016-05-12/high-extend.html)
 
 ## 配置项说明
 
